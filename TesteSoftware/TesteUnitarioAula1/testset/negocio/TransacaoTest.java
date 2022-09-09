@@ -19,24 +19,28 @@ public class TransacaoTest {
 	Locacao locacao2;
 	Filme filme1;
 	Filme filme2;
+	Cliente cliente1;
+	Cliente cliente2;
+	Cliente cliente3;
 
 	@Before
 	public void setUp() throws Exception {
+		transacao = new Transacao();
 		locacao1 = new Locacao();
 		locacao2 = new Locacao();
 		filme1 = new Filme("Java", Genero.ROMANCE);
 		filme1.valorCompra = 100;
 
 		filme2 = new Filme("JavaScript", Genero.ROMANCE);
-		filme2.valorCompra = 50;
+		filme2.valorCompra = 50; 
 		filme2.id=20;
 		
 		Horario horario1 = new Horario("07/09/2022","19:07");
 		Horario horario2 = new Horario("16/01/2022","20:07");
 		
-		Cliente cliente1 = new Cliente("Izaias", 2,"Ativo");
-		Cliente cliente2 = new Cliente("Thiago", 3,"Ativo");
-		Cliente cliente3 = new Cliente("Thiago", 4,"Inativo");
+		cliente1 = new Cliente("Izaias", 2,"Ativo");
+		cliente2 = new Cliente("Thiago", 3,"Ativo");
+		cliente3 = new Cliente("Thiago", 4,"Inativo");
 		
 		//testa o status do cliente
 		assertEquals(true, cliente3.statusCliente());
@@ -52,20 +56,30 @@ public class TransacaoTest {
 		if(!cliente3.statusCliente()) {
 			locacao2.alugar(cliente3, filme2,horario2);
 		}
-		
-		
-		//teste do horário
-		assertEquals("07/09/2022", locacao1.horario.data); 
-		assertEquals("20:07", locacao2.horario.hora); 
+			
 		
 
-		transacao = new Transacao();
+		//transacao = new Transacao();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
+	//teste do horário
+	@Test
+	public void horarioTest() {
+		assertEquals("07/09/2022", locacao1.horario.data); 
+		assertEquals("20:07", locacao2.horario.hora); 
+	}
+	
+	@Test
+	public void statusClienteTest() {
+		//testa o status do cliente
+		assertEquals(true, cliente3.statusCliente());
+		assertEquals(false, cliente2.statusCliente());
+	}
+	
 	@Test
 	public void valorLocacaoTotalTest() {
 
@@ -96,10 +110,28 @@ public class TransacaoTest {
 	public void calculoLucroTest() {
 		
 		locacao2.setValorAluguel(25);
-		transacao.alugueis.add(locacao2);
+		transacao.alugueis.add(locacao2); 
 		
 		assertEquals(50,transacao.calculoLucro(20),0.01);
 	}
+	
+	@Test
+	public void contGeneroTest() {
+		transacao.alugueis.add(locacao1);
+		transacao.alugueis.add(locacao2);
+		transacao.alugueis.add(locacao2);
+		assertEquals(Genero.ROMANCE,transacao.contGenero());
+	}
+	@Test
+	public void valorDescontoGenero() {
+		transacao.alugueis.add(locacao1);
+		transacao.alugueis.add(locacao2);
+		transacao.alugueis.add(locacao2);
+		transacao.valorDescontoGenero(Genero.ROMANCE, 20);
+		assertEquals(20, transacao.descontoGenero.get(Genero.ROMANCE), 0);
+		
+	}
+	
 	public void test1() {
 
 		assertEquals(Math.PI, 3.14, 0.01); 
