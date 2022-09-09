@@ -42,9 +42,7 @@ public class TransacaoTest {
 		cliente2 = new Cliente("Thiago", 3,"Ativo");
 		cliente3 = new Cliente("Thiago", 4,"Inativo");
 		
-		//testa o status do cliente
-		assertEquals(true, cliente3.statusCliente());
-		assertEquals(false, cliente2.statusCliente());
+		
 		
 		//assertEquals(true,loca)
 		if(!cliente1.statusCliente()) {
@@ -58,8 +56,6 @@ public class TransacaoTest {
 		}
 			
 		
-
-		//transacao = new Transacao();
 	}
 
 	@After

@@ -1,10 +1,13 @@
 package negocio;
 
+import java.util.ArrayList;
+
 public class Cliente {
 
 	protected String nome;
 	protected int id;
 	protected String status;
+	protected ArrayList<Filme> filmesFavoritos = new ArrayList<Filme>();
 	
 	public Cliente(String nome, int id,String status) {
 		this.nome= nome;
@@ -18,5 +21,8 @@ public class Cliente {
 		else {
 			return false;
 		}
+	}
+	public void addFilmesFavoritos(Filme filme) {
+		filmesFavoritos.add(filme);
 	}
 }
