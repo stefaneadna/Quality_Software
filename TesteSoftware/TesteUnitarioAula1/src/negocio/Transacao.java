@@ -54,7 +54,7 @@ public class Transacao {
 				cont = cont_genero.get(locacao.filme.genero);
 				cont++;
 				cont_genero.put(locacao.filme.genero, cont);
-				if(cont>maiorValor) {
+				if(cont>=maiorValor) {
 					generoMaiorValor = locacao.filme.genero;
 					maiorValor = cont;
 				}

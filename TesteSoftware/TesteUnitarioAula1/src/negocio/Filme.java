@@ -27,16 +27,10 @@ public class Filme {
 
 	@Override
 	public boolean equals(Object obj) {
+		Filme other = (Filme) obj;
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Filme other = (Filme) obj;
-		if (genero != other.genero)
-			return false;
-		if (id != other.id)
+		if (obj == null || getClass() != obj.getClass() || genero != other.genero || id != other.id )
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
