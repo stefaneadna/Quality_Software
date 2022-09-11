@@ -30,14 +30,12 @@ public class Filme {
 		Filme other = (Filme) obj;
 		if (this == obj)
 			return true;
-		if (obj == null || getClass() != obj.getClass() || genero != other.genero || id != other.id )
+		if (obj == null || getClass() != obj.getClass() || genero != other.genero || id != other.id || Double.doubleToLongBits(valorCompra) != Double.doubleToLongBits(other.valorCompra))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;
-		if (Double.doubleToLongBits(valorCompra) != Double.doubleToLongBits(other.valorCompra))
 			return false;
 		return true;
 	}
